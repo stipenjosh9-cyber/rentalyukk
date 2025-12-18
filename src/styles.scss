@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+// Variables
+$primary-color: #3b82f6; // Tailwind blue-500
+$bg-dark: #111827; // gray-900
+$bg-panel: #1f2937; // gray-800
+$text-light: #f3f4f6;
+
+// Mixins
+@mixin glass-effect {
+    background: rgba(31, 41, 55, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: $bg-dark;
+    color: $text-light;
+}
+
+// Enhance Dashboard Cards with Glassmorphism
+.bg-gray-800 {
+    @include glass-effect;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        border-color: rgba($primary-color, 0.3);
+    }
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $bg-dark;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+// Modal Animation Classes (Legacy support + SCSS enhancement)
+.modal-content-area {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &.modal-showing {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    &.modal-closing {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+}
+
+// Table Row Hover
+tbody tr {
+    transition: background-color 0.15s ease;
+    &:hover {
+        background-color: rgba(55, 65, 81, 0.8); // Slightly lighter than gray-800
+    }
+}
+
+// Stats Animation Item
+.stats-item-anim {
+    opacity: 0;
+    animation: slideInRight 0.5s forwards ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+// Custom Dropdown
+.dropdown-panel {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    margin-top: 0.5rem;
+    max-height: 15rem;
+    overflow: auto;
+    background-color: $bg-panel;
+    border: 1px solid #4b5563;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+    &.open {
+        display: block;
+        animation: fadeIn 0.2s;
+    }
+}
+
+.dropdown-option {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: #d1d5db;
+
+    &:hover, &.selected {
+        background-color: $primary-color;
+        color: white;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+// Invoice Button
+.invoice-btn {
+    background: linear-gradient(45deg, #10b981, #059669);
+    &:hover {
+        background: linear-gradient(45deg, #059669, #047857);
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+}
