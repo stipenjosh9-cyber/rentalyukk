@@ -1,0 +1,32 @@
+{
+  "name": "rentalyuk-app",
+  "version": "1.0.0",
+  "description": "Sistem Manajemen Sewa dengan Animasi GSAP dan Billing PDF",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:js": "esbuild src/main.ts --bundle --outfile=dist/bundle.js --target=es2016",
+    "build:css": "sass src/styles.scss dist/styles.css",
+    "build": "npm run build:js && npm run build:css",
+    "watch": "npm run build -- --watch"
+  },
+  "keywords": [
+    "rentalyuk",
+    "dashboard",
+    "billing",
+    "animation"
+  ],
+  "author": "Jules",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/chart.js": "^2.9.41",
+    "@types/jspdf": "^1.3.3",
+    "chart.js": "^4.5.1",
+    "esbuild": "^0.27.2",
+    "gsap": "^3.14.2",
+    "jspdf": "^3.0.4",
+    "sass": "^1.97.0",
+    "typescript": "^5.9.3"
+  }
+}

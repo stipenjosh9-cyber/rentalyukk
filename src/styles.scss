@@ -1,0 +1,105 @@
+// Variables
+$primary-color: #2563eb; // blue-600
+$bg-dark: #111827; // gray-900
+$bg-card: #1f2937; // gray-800
+$text-light: #f3f4f6; // gray-100
+
+// Mixins
+@mixin glassmorphism {
+    background: rgba(31, 41, 55, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@mixin card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+// Global Styles
+body {
+    background-color: $bg-dark;
+    font-family: 'Inter', sans-serif;
+}
+
+// Sidebar
+aside {
+    @include glassmorphism;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+    .nav-link {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: $primary-color;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        &:hover, &.active {
+            background: rgba(37, 99, 235, 0.2);
+            color: #fff;
+
+            &::before {
+                transform: scaleY(1);
+            }
+        }
+    }
+}
+
+// Cards
+.bg-gray-800 {
+    @include glassmorphism;
+    @include card-hover;
+}
+
+// Buttons
+button {
+    transition: all 0.2s ease;
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+// Modal
+.modal-content-area {
+    @include glassmorphism;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+// Stats Chart
+#stats-pie-chart {
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.3));
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $bg-dark;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+
+    &:hover {
+        background: #4b5563;
+    }
+}
