@@ -611,6 +611,16 @@ function handleReturnRental(e) {
             price: rentalToMove.price || 0 
         };
 
+    // GENERATE INVOICE AUTOMATICALLY
+    if (window.app && window.app.billing) {
+        try {
+            const item = localInventory.find(i => i.id === rentalToMove.itemId);
+            window.app.billing.generateInvoice(rentalToMove, item);
+        } catch(err) {
+            console.error("Gagal generate invoice:", err);
+        }
+    }
+
         const itemInInventory = localInventory.find(item => item.id === itemIdToReturn);
 
         localRentals.splice(rentalToMoveIndex, 1); 
@@ -1052,6 +1062,10 @@ function navigateTo(pageId) {
     Object.values(pages).forEach(page => page.classList.add('hidden'));
     if (pages[pageId]) {
         pages[pageId].classList.remove('hidden');
+        // TRIGGER GSAP ANIMATION
+        if (window.app && window.app.ui) {
+            window.app.ui.animatePageTransition(pageId);
+        }
     }
     navLinks.forEach(link => {
         link.classList.remove('active');
